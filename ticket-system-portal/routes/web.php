@@ -19,5 +19,5 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
-Route::get('/dashboard/', [DashboardController::class, 'index'])->name('dashboard.index');
-Route::get('/student/', [StudentController::class, 'index'])->name('student.index');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+Route::get('/students', [StudentController::class, 'index'])->name('student.index');

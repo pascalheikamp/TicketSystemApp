@@ -42,5 +42,11 @@
 <div class="sidebar">
     @include('partials.sidebar.sidebar');
 </div>
+<main class="main-content">
+@yield('content')
+</main>
+<footer>
+
+</footer>
 </body>
 </html>
