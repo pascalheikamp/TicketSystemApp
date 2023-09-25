@@ -11,4 +11,12 @@ class Ticket extends Model
     protected $primaryKey = 'ticket_id';
     public $incrementing = true;
     public $timestamps = true;
+
+    public function user() {
+        return $this->belongsTo(User::class);
+
+    }
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
 }

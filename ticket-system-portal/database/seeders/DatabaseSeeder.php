@@ -4,7 +4,10 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Student;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Ramsey\Uuid\Type\Integer;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,15 +16,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Student::factory()->create([
-            'firstname' => 'Jan',
-            'lastname' => 'Janssen',
-            'email' => 'janjanssen@hotmail,com',
-            'address' => 'Willemplein 301',
-            'telephone' => '010-3246911',
-            'klas' => 'CMI2'
-        ]);
-        // \App\Models\User::factory(10)->create();
+
+        //User::factory(10)->create();
+        /*Student::factory()
+            ->count(10)
+            ->hasPosts(1)
+            ->create();
+        */
+        \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

@@ -11,4 +11,8 @@ class Category extends Model
     protected $primaryKey = 'category_id';
     public $incrementing = true;
     public $timestamps = true;
+
+    public function ticket() {
+        return $this->belongsTo(Ticket::class);
+    }
 }
