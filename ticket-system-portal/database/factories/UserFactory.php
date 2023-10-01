@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use function Laravel\Prompts\password;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -20,8 +21,16 @@ class UserFactory extends Factory
         return [
             'username' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'role'=> fake()->name(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'student_number' => fake()->unique()->numerify(),
+            'firstname' => fake()->firstName(),
+            'lastname' => fake()->lastName(),
+            'date_of_birth' => fake()->date(),
+            'klas' => fake()->name(),
+            'address' => fake()->address(),
+            'role'=> 'student',
+            'login_limit' => 10,
+            'login_time' => fake()->dateTime(),
+            'password' => fake()->unique()->password(5, 20), // password
             'remember_token' => Str::random(10),
         ];
     }
