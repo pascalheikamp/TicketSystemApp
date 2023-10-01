@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -32,10 +33,10 @@
             </a>
         </div>
         <div>
-            <a href="#" class="inline-block text-sm px-4 py-2 leading-none text-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Login</a>
+            <a href="{{route('login')}}" class="inline-block text-sm px-4 py-2 leading-none text-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Login</a>
         </div>
         <div>
-            <a href="#" class="inline-block text-sm px-4 py-2 leading-none text-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Register</a>
+            <a href="{{route('register')}}" class="inline-block text-sm px-4 py-2 leading-none text-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Register</a>
         </div>
     </div>
 </nav>
