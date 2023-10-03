@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use function Laravel\Prompts\password;
+use function Webmozart\Assert\Tests\StaticAnalysis\integer;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -21,7 +22,7 @@ class UserFactory extends Factory
         return [
             'username' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'student_number' => fake()->unique()->numerify(5),
+            'student_number' => fake()->unique()->numerify(),
             'firstname' => fake()->firstName(),
             'lastname' => fake()->lastName(),
             'date_of_birth' => fake()->date(),

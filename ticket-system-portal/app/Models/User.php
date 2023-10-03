@@ -15,8 +15,8 @@ class User extends Model
     public $incrementing = true;
     public $timestamps = true;
 
-    public function student() {
-        return $this->hasOne(Student::class);
+    public function tickets() {
+        return $this->hasMany(Ticket::class);
     }
 
 }
