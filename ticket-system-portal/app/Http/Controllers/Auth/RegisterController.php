@@ -62,6 +62,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
+
     protected function create(array $data)
     {
         return User::create([
@@ -69,5 +70,9 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+    public function setDefaultSelectedValues() {
+        $value = "hello";
+        return view('auth.register', compact('value'));
     }
 }

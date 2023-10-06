@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+   @yield('pagescript')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <meta charset="UTF-8">
     <meta name="viewport"
