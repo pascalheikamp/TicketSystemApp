@@ -63,16 +63,21 @@ class RegisterController extends Controller
      * @return \App\Models\User
      */
 
+
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'user' => $data['user'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
     }
-    public function setDefaultSelectedValues() {
-        $value = "hello";
-        return view('auth.register', compact('value'));
+    public function store() {
+        $user = new User();
+
     }
+//    public function setDefaultSelectedValues() {
+//        $value = "hello";
+//        return view('auth.register', compact('value'));
+//    }
 }

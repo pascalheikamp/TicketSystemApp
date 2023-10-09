@@ -26,6 +26,6 @@ Route::get('/student/studentid/{{studentid}}', [StudentController::class, 'GetSt
 
 
 Auth::routes();
-Route::get('/register', [RegisterController::class, 'setDefaultSelectedValues'])->name('register');
+//Route::get('/register', [RegisterController::class, 'setDefaultSelectedValues'])->name('register');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
