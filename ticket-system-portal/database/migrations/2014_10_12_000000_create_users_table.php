@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('role');
-            $table->string('username');
+            $table->string('name');
             $table->string('password');
             $table->integer('login_limit');
             $table->dateTime('login_time');
@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('lastname', 100);
             $table->date('date_of_birth');
             $table->string('email', 200);
+            $table->string('email_verified_at')->nullable();
             $table->string('klas', 50);
             $table->string('address', 500);
             $table->rememberToken();
