@@ -1,7 +1,8 @@
 @extends('layouts.layout')
 
 @section('content')
-<div class="container">
+    <body class="bg-gradient-to-r from-indigo-600 to-indigo-300">
+<div class="container h-auto">
     <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
         <div class="col-md-8">
             <div class="card">
@@ -80,6 +81,9 @@
                 </div>
             </div>
         </div>
+        <div><img class=" border- border-2 border-solid border-black w-32" src="{{Vite::asset('resources/images/login-image.png')}}"/> </div>
     </div>
+    <div>hello</div>
 </div>
+    </body>
 @endsection

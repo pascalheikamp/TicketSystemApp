@@ -10,7 +10,7 @@
     <title>Document</title>
 </head>
 <body>
-<nav class="flex items-center justify-between flex-wrap bg-blue-500 p-6">
+<nav class="flex items-center justify-between flex-wrap bg-indigo-950 p-6">
     <div class="flex items-center flex-shrink-0 text-white mr-6">
         <img class="nav w-11" src="{{Vite::asset('resources/images/supporthelpdesk-logo.png')}}"/>
         <span class="font-semibold text-xl tracking-tight">Ticket system portal</span>

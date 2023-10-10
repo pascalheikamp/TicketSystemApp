@@ -1,8 +1,5 @@
 @extends('layouts.layout')
 @vite(['resources/js/app.js'])
-@section('pagescript')
-    <script src="{{public_path('..js/calender.js')}}"
-@stop
 <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css">
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
 <style>
