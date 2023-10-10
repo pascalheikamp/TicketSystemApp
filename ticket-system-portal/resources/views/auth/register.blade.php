@@ -1,4 +1,5 @@
 @extends('layouts.layout')
+@vite(['resources/js/app.js'])
 @section('pagescript')
     <script src="{{public_path('..js/calender.js')}}"
 @stop
@@ -73,18 +74,18 @@
 @section('content')
     <form method="post" action="{{ route('register') }}" class="mt-20 mx-auto w-full max-w-lg">
         @csrf
-        <h1 class="text-xl font-semibold">Register</h1>
-        <div class=" pt-10 flex flex-wrap -mx-3 mb-6">
+        <h1 class="text-left text-xl font-semibold">Register</h1>
+        <div class=" pt-10 flex flex-wrap -mx-8 mb-6">
             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="firstname">
                     First Name
                 </label>
                 <input
-                    class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                    class=" @error('firstname') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     value="{{ old('firstname') }}" name="firstname" id="firstname" type="text"
                     placeholder="{{fake()->firstName}}">
                 @error('firstname')
-                <span class="invalid-feedback" role="alert">
+                <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                 @enderror
@@ -94,11 +95,11 @@
                     Last Name
                 </label>
                 <input
-                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    class=" @error('lastname') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     value="{{ old('lastname') }}" name="lastname" id="lastname" type="text"
                     placeholder="{{fake()->lastName()}}">
                 @error('lastname')
-                <span class="invalid-feedback" role="alert">
+                <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                 @enderror
@@ -108,11 +109,11 @@
                     Address
                 </label>
                 <input
-                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    class=" @error('address') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     value="{{ old('address') }}" name="address" id="address" type="text"
                     placeholder="{{fake()->address()}}">
-                @error('email')
-                <span class="invalid-feedback" role="alert">
+                @error('address')
+                <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                 @enderror
@@ -122,10 +123,10 @@
                     Class
                 </label>
                 <input
-                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                    value="{{ old('klas') }}" name="klas" id="klas" type="text" placeholder="CMT2A">
-                @error('klas')
-                <span class="invalid-feedback" role="alert">
+                    class=" @error('class') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    value="{{ old('class') }}" name="class" id="class" type="text" placeholder="CMT2A">
+                @error('class')
+                <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                 @enderror
@@ -135,10 +136,10 @@
                     email
                 </label>
                 <input
-                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    class="@error('email') border-red-500 @enderror() appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     value="{{ old('email') }}" name="email" id="email" type="text" placeholder="{{fake()->email()}}">
                 @error('email')
-                <span class="invalid-feedback" role="alert">
+                <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                 @enderror
@@ -168,11 +169,11 @@
                     Student number
                 </label>
                 <input
-                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    class="@error('student_number') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     value="{{ old('student_number') }}" name="student_number" id="student_number" type="text"
                     placeholder="102">
                 @error('student_number')
-                <span class="invalid-feedback" role="alert">
+                <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                 @enderror
@@ -186,7 +187,7 @@
                                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Date of
                                 birth</label>
                             <div class="relative">
-                                <input type="hidden" name="date" x-ref="date">
+                                <input type="hidden" name="date_of_birth" x-ref="date">
                                 <input
                                     type="text"
                                     readonly
@@ -203,7 +204,12 @@
                                               d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                     </svg>
                                 </div>
-
+                                <div>
+                                    @error('date_of_birth')
+                                    <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>@enderror
+                                </div>
 
                                 <!-- <div x-text="no_of_days.length"></div>
                                 <div x-text="32 - new Date(year, month, 32).getDate()"></div>
@@ -291,10 +297,10 @@
                     Username
                 </label>
                 <input
-                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    class="@error('name') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     name="name" value="{{old('name')}}" id="name" type="text" placeholder="{{fake()->userName()}}">
                 @error('name')
-                <span class="invalid-feedback" role="alert">
+                <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                 @enderror
@@ -304,30 +310,31 @@
                     Password
                 </label>
                 <input
-                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    class="@error('password') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     name="password" id="password" type="password" placeholder="******************">
                 @error('password')
-                <span class="invalid-feedback" role="alert">
+                <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
                                         <strong>{{ $message }}</strong>
                                     </span>
                 @enderror
             </div>
         </div>
+        <div class="start-0">
+            <label for="password-confirm"
+                   class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">{{ __('Confirm Password') }}</label>
 
-        <label for="password-confirm"
-               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">{{ __('Confirm Password') }}</label>
-
-        <div class="col-md-6">
-            <input
-                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="password-confirm" type="password" name="password_confirmation"  placeholder="******************" required
-                autocomplete="new-password">
+            <div class="col-md-6">
+                <input
+                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="password-confirm" type="password" name="password_confirmation" placeholder="******************"
+                    autocomplete="new-password">
+            </div>
+            <button
+                class=" h-10 justify-center flex flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
+                type="submit">
+                Sign Up
+            </button>
         </div>
-        <button
-            class=" h-10 justify-center flex flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
-            type="submit">
-            Sign Up
-        </button>
     </form>
 @endsection
 
