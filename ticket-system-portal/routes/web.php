@@ -20,8 +20,8 @@ use App\Http\Controllers\Auth\RegisterController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-Route::get('/students', [StudentController::class, 'index'])->name('student.index');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('auth');
+Route::get('/student-dashboard', [StudentController::class, 'index'])->name('student.index')->middleware('auth');
 Route::get('/student/studentid/{{studentid}}', [StudentController::class, 'GetStudent']);
 
 

@@ -1,31 +1,15 @@
 @extends('layouts.layout')
 
 @section('content')
-    <body class="bg-gradient-to-r from-indigo-600 to-indigo-300">
-<div class="container h-auto">
-    <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-        <div class="col-md-8">
-            <div class="card">
-                <div
-                    class="relative overflow-hidden bg-cover bg-no-repeat"
-                    style="
-      background-position: 50%;
-      background-color: #CCCCFF;
-      height: 50px;
-    ">
-                    <div
-                        class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-fixed"
-                        style="background-color: rgba(0, 0, 0, 0.75)">
-                        <div class="flex h-full items-center justify-center">
-                            <div class="px-6 text-center text-white md:px-12">
-                                <h1 class="mb-6 text-5xl font-bold"></h1>
-                                <h3 class="mb-8 text-2xl font-bold">{{ __('Register') }}</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-body">
+    <body class=" w-auto bg-gradient-to-r from-indigo-600 to-indigo-300">
+<div class="container w-auto flex mx-auto justify-center mt-36 h-auto">
+    <div class="flex justify-center w-auto pl-0 sm:max-w-md mt-0 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+        <div class=" w-full flex justify-between">
+                <div class="card-body pr-3 pl-3 w-full">
+                    <h5
+                        class="border-b-2 border-neutral-100 px-6 py-3 text-xl font-medium leading-tight dark:border-neutral-600 dark:text-black">
+                        Login
+                    </h5>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -33,7 +17,7 @@
                             <label for="email" class="block font-medium text-sm text-gray-700">{{ __('Email Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="email" type="email" class=" bg-blue-50 block mt-1 w-64 border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -47,7 +31,7 @@
                             <label for="password" class="block font-medium text-sm text-gray-700">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input id="password" type="password" class="block mt-1 w-64 bg-blue-50 border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -75,15 +59,16 @@
                                 <button type="submit" class="ml-3 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">
                                     {{ __('Log in') }}
                                 </button>
+                                    <div><img class=" border-2 border-solid border-black w-32" src="{{Vite::asset('resources/images/login-image.png')}}"/> </div>
                             </div>
                         </div>
                     </form>
                 </div>
+            <img class="mx-auto rounded-full border-blue-600 border-2  mt-32 justify-center h-40 w-40" src="{{Vite::asset('resources/images/group-people.jpg')}}"/>
             </div>
         </div>
-        <div><img class=" border- border-2 border-solid border-black w-32" src="{{Vite::asset('resources/images/login-image.png')}}"/> </div>
+
     </div>
-    <div>hello</div>
 </div>
     </body>
 @endsection

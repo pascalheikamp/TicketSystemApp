@@ -10,7 +10,7 @@
     <title>Document</title>
 </head>
 <body>
-<nav class="flex items-center justify-between flex-wrap bg-indigo-950 p-6">
+<nav class="fixed w-full flex items-center justify-between flex-wrap bg-indigo-950 p-6">
     <div class="flex items-center flex-shrink-0 text-white mr-6">
         <img class="nav w-11" src="{{Vite::asset('resources/images/supporthelpdesk-logo.png')}}"/>
         <span class="font-semibold text-xl tracking-tight">Ticket system portal</span>
@@ -34,24 +34,23 @@
         </div>
         @guest
             @if (Route::has('login'))
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                <li class="nav-item list-none">
+                    <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Login') }}</a>
                 </li>
             @endif
 
             @if (Route::has('register'))
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                <li class="nav-item list-none pr-10 ml-10">
+                    <a class="nav-link text-white" href="{{ route('register') }}">{{ __('Register') }}</a>
                 </li>
             @endif
         @else
-            <li class="nav-item dropdown">
-                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+            <li class="nav-item dropdown list-none flex content-around">
+                <a href="#responsive-header" class="mr-10 block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white">
                     {{ Auth::user()->name }}
                 </a>
-
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ route('logout') }}"
+                    <a class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white" href="{{ route('logout') }}"
                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                         {{ __('Logout') }}

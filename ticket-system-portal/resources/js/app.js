@@ -1,5 +1,5 @@
 import './bootstrap';
-import '../../public/js/calender.js';
+import './calender.js';
 
 import.meta.glob([
     '../images/**',
