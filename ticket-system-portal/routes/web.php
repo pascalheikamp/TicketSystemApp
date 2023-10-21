@@ -20,9 +20,21 @@ use App\Http\Controllers\Auth\RegisterController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('auth');
-Route::get('/student-dashboard', [StudentController::class, 'index'])->name('student.index')->middleware('auth');
-Route::get('/student/studentid/{{studentid}}', [StudentController::class, 'GetStudent']);
+//admin
+Route::prefix('admin')->middleware('auth' ,'isAdmin')->group(function () {
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+//    Route::get('/tickets', DashboardController::class, 'ShowTicketDetails');
+//    Route::get('/tickets/{id}', DashboardController::class, 'GetCurrentTicket');
+//    Route::put('/ticket-status/{id}', DashboardController::class, 'ShowTickets');
+});
+Route::get('/student/dashboard', [StudentController::class, 'index'])->name('student.index');
+//Route::get(/tickets', [StudentController::class, 'showTicketOverview']);
+//Route::get('/tickets/{id}');
+//Route::get('tickets/edit/{id}');
+//Route::post('tickets/update/{id}');
+//Route::get('tickets/create');
+//Route::post('/tickets/store');
+//Route::delete('/tickets/{id}');
 
 
 Auth::routes();

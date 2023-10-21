@@ -2,7 +2,7 @@
     <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-200">
         <ul class="space-y-2 text-gray-800 font-medium">
             <li>
-                <a href="/student-dashboard" class="flex items-center p-2 text-gray-900 rounded-lg text-gray-800 hover:text-amber-50 hover:bg-gray-100 dark:hover:bg-gray-800 group">
+                <a href="{{route('student.index')}}" class="flex items-center p-2 text-gray-900 rounded-lg text-gray-800 hover:text-amber-50 hover:bg-gray-100 dark:hover:bg-gray-800 group">
                     <img class="nav w-7" src="{{Vite::asset('resources/images/student_icon.png')}}"/>
                     <span class="ml-3">Student</span>
                 </a>

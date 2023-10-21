@@ -13,7 +13,7 @@
                    <div class="flex h-full items-center justify-center">
                        <div class="px-6 text-center text-white md:px-12">
                            <h1 class="mb-6 text-5xl font-bold"></h1>
-                           <h3 class="mb-8 text-2xl font-bold">{{ __('Student service center') }}</h3>
+                           <h3 class="mb-8 text-2xl font-bold"> Welkom {{ Auth::user()->name }}</h3>
                        </div>
                    </div>
                </div>
