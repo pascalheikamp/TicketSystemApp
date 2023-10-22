@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +20,24 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-Route::get('/students', [StudentController::class, 'index'])->name('student.index');
-Route::get('/student/studentid/{{studentid}}', [StudentController::class, 'GetStudent']);
+//admin
+Route::prefix('admin')->middleware('auth' ,'isAdmin')->group(function () {
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+//    Route::get('/tickets', DashboardController::class, 'ShowTicketDetails');
+//    Route::get('/tickets/{id}', DashboardController::class, 'GetCurrentTicket');
+//    Route::put('/ticket-status/{id}', DashboardController::class, 'ShowTickets');
+});
+Route::get('/student/dashboard', [StudentController::class, 'index'])->name('student.index');
+//Route::get(/tickets', [StudentController::class, 'showTicketOverview']);
+//Route::get('/tickets/{id}');
+//Route::get('tickets/edit/{id}');
+//Route::post('tickets/update/{id}');
+//Route::get('tickets/create');
+//Route::post('/tickets/store');
+//Route::delete('/tickets/{id}');
 
-require __DIR__.'/auth.php';
+
+Auth::routes();
+//Route::get('/register', [RegisterController::class, 'setDefaultSelectedValues'])->name('register');
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

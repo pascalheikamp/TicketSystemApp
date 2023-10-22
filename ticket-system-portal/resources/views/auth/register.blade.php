@@ -1,72 +1,412 @@
 @extends('layouts.layout')
+@vite(['resources/js/app.js'])
+<link rel="stylesheet" href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css">
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+<style>
+    [x-cloak] {
+        display: none;
+    }
+</style>
+<script>
+    const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+    function app() {
+        return {
+            showDatepicker: false,
+            datepickerValue: '',
+
+            month: '',
+            year: '',
+            no_of_days: [],
+            blankdays: [],
+            days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+
+            initDate() {
+                let today = new Date();
+                this.month = today.getMonth();
+                this.year = today.getFullYear();
+                this.datepickerValue = new Date(this.year, this.month, today.getDate()).toDateString();
+            },
+
+            isToday(date) {
+                const today = new Date();
+                const d = new Date(this.year, this.month, date);
+
+                return today.toDateString() === d.toDateString() ? true : false;
+            },
+
+            getDateValue(date) {
+                let selectedDate = new Date(this.year, this.month, date);
+                this.datepickerValue = selectedDate.toDateString();
+
+                this.$refs.date.value = selectedDate.getFullYear() + "-" + ('0' + selectedDate.getMonth()).slice(-2) + "-" + ('0' + selectedDate.getDate()).slice(-2);
+
+                console.log(this.$refs.date.value);
+
+                this.showDatepicker = false;
+            },
+
+            getNoOfDays() {
+                let daysInMonth = new Date(this.year, this.month + 1, 0).getDate();
+
+                // find where to start calendar day of week
+                let dayOfWeek = new Date(this.year, this.month).getDay();
+                let blankdaysArray = [];
+                for (var i = 1; i <= dayOfWeek; i++) {
+                    blankdaysArray.push(i);
+                }
+
+                let daysArray = [];
+                for (var i = 1; i <= daysInMonth; i++) {
+                    daysArray.push(i);
+                }
+
+                this.blankdays = blankdaysArray;
+                this.no_of_days = daysArray;
+            }
+        }
+    }
+</script>
 @section('content')
-	<div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-        <h1 class="font-semibold">Register</h1>
-		<div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-			<!-- Validation Errors -->
-			@if ($errors->any())
-				<div class="mb-4">
-					<div class="font-medium text-red-600">
-						{{ __('Whoops! Something went wrong.') }}
-					</div>
+    <form method="post" action="{{ route('register') }}" class="mt-20 mx-auto w-full max-w-lg">
+        @csrf
+        <h1 class="text-left text-xl font-semibold">Register</h1>
+        <div class=" pt-10 flex flex-wrap -mx-8 mb-6">
+            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="firstname">
+                    First Name
+                </label>
+                <input
+                    class=" @error('firstname') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                    value="{{ old('firstname') }}" name="firstname" id="firstname" type="text"
+                    placeholder="{{fake()->firstName}}">
+                @error('firstname')
+                <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                @enderror
+            </div>
+            <div class="w-full md:w-1/2 px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                    Last Name
+                </label>
+                <input
+                    class=" @error('lastname') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    value="{{ old('lastname') }}" name="lastname" id="lastname" type="text"
+                    placeholder="{{fake()->lastName()}}">
+                @error('lastname')
+                <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                @enderror
+            </div>
+            <div class="w-full md:w-1/2 px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                    Address
+                </label>
+                <input
+                    class=" @error('address') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    value="{{ old('address') }}" name="address" id="address" type="text"
+                    placeholder="{{fake()->address()}}">
+                @error('address')
+                <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                @enderror
+            </div>
+            <div class="w-full md:w-1/2 px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                    Class
+                </label>
+                <input
+                    class=" @error('class') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    value="{{ old('class') }}" name="class" id="class" type="text" placeholder="CMT2A">
+                @error('class')
+                <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                @enderror
+            </div>
+            <div class="w-full md:w-1/2 px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                    email
+                </label>
+                <input
+                    class="@error('email') border-red-500 @enderror() appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    value="{{ old('email') }}" name="email" id="email" type="text" placeholder="{{fake()->email()}}">
+                @error('email')
+                <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                @enderror
+                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+                        Role
+                    </label>
+                    <div class="relative">
+                        <select
+                            class="block  appearance-none w-auto bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                            name='role' id="role">
+                            <option name="student" value="student">Student</option>
+                            <option name="teacher" value="teacher">Teacher</option>
+                            <option name="concierge" value="concierge">Concierge</option>
+                        </select>
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-0 justify-end flex items-end px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="studentnumber">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                    Student number
+                </label>
+                <input
+                    class="@error('student_number') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    value="{{ old('student_number') }}" name="student_number" id="student_number" type="text"
+                    placeholder="102">
+                @error('student_number')
+                <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                @enderror
+            </div>
+            <div class="antialiased sans-serif">
+                <div x-data="app()" x-init="[initDate(), getNoOfDays()]" x-cloak>
+                    <div class="container mx-auto px-4 py-2 md:py-10">
+                        <div class="mb-5 w-64">
 
-					<ul class="mt-3 list-disc list-inside text-sm text-red-600">
-						@foreach ($errors->all() as $error)
-							<li>{{ $error }}</li>
-						@endforeach
-					</ul>
-				</div>
-			@endif
+                            <label for="datepicker"
+                                   class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Date of
+                                birth</label>
+                            <div class="relative">
+                                <input type="hidden" name="date_of_birth" x-ref="date">
+                                <input
+                                    type="text"
+                                    readonly
+                                    x-model="datepickerValue"
+                                    @click="showDatepicker = !showDatepicker"
+                                    @keydown.escape="showDatepicker = false"
+                                    class="w-full pl-4 pr-10 py-3 leading-none rounded-lg shadow-sm focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+                                    placeholder="Select date">
 
-			<form method="POST" action="{{ route('register') }}">
-			@csrf
+                                <div class="absolute top-0 right-0 px-3 py-2">
+                                    <svg class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24"
+                                         stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    @error('date_of_birth')
+                                    <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>@enderror
+                                </div>
 
-			<!-- Name -->
-				<div>
-					<label for="name" class="block font-medium text-sm text-gray-700">
-						{{ __('Name') }}
-					</label>
+                                <!-- <div x-text="no_of_days.length"></div>
+                                <div x-text="32 - new Date(year, month, 32).getDate()"></div>
+                                <div x-text="new Date(year, month).getDay()"></div> -->
 
-					<input id="name" name="name" type="text" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" value="{{ old('name') }}" required autofocus>
-				</div>
+                                <div
+                                    class="bg-white mt-12 rounded-lg shadow p-4 absolute top-0 left-0"
+                                    style="width: 17rem"
+                                    x-show.transition="showDatepicker"
+                                    @click.away="showDatepicker = false">
 
-				<!-- Email Address -->
-				<div class="mt-4">
-					<label for="email" class="block font-medium text-sm text-gray-700">
-						{{ __('Email') }}
-					</label>
+                                    <div class="flex justify-between items-center mb-2">
+                                        <div>
+                                            <span x-text="MONTH_NAMES[month]"
+                                                  class="text-lg font-bold text-gray-800"></span>
+                                            <span x-text="year" class="ml-1 text-lg text-gray-600 font-normal"></span>
+                                        </div>
+                                        <div>
+                                            <button
+                                                type="button"
+                                                class="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full"
+                                                :class="{'cursor-not-allowed opacity-25': month == 0 }"
+                                                :disabled="month == 0 ? true : false"
+                                                @click="month--; getNoOfDays()">
+                                                <svg class="h-6 w-6 text-gray-500 inline-flex" fill="none"
+                                                     viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                          stroke-width="2" d="M15 19l-7-7 7-7"/>
+                                                </svg>
+                                            </button>
+                                            <button
+                                                type="button"
+                                                class="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full"
+                                                :class="{'cursor-not-allowed opacity-25': month == 11 }"
+                                                :disabled="month == 11 ? true : false"
+                                                @click="month++; getNoOfDays()">
+                                                <svg class="h-6 w-6 text-gray-500 inline-flex" fill="none"
+                                                     viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                          stroke-width="2" d="M9 5l7 7-7 7"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
 
-					<input id="email" name="email" type="email" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" value="{{ old('email') }}" required>
-				</div>
+                                    <div class="flex flex-wrap mb-3 -mx-1">
+                                        <template x-for="(day, index) in DAYS" :key="index">
+                                            <div style="width: 14.26%" class="px-1">
+                                                <div
+                                                    x-text="day"
+                                                    class="text-gray-800 font-medium text-center text-xs"></div>
+                                            </div>
+                                        </template>
+                                    </div>
 
-				<!-- Password -->
-				<div class="mt-4">
-					<label for="password" class="block font-medium text-sm text-gray-700">
-						{{ __('Password') }}
-					</label>
+                                    <div class="flex flex-wrap -mx-1">
+                                        <template x-for="blankday in blankdays">
+                                            <div
+                                                style="width: 14.28%"
+                                                class="text-center border p-1 border-transparent text-sm"
+                                            ></div>
+                                        </template>
+                                        <template x-for="(date, dateIndex) in no_of_days" :key="dateIndex">
+                                            <div style="width: 14.28%" class="px-1 mb-1">
+                                                <div
+                                                    @click="getDateValue(date)"
+                                                    x-text="date"
+                                                    class="cursor-pointer text-center text-sm leading-none rounded-full leading-loose transition ease-in-out duration-100"
+                                                    :class="{'bg-blue-500 text-white': isToday(date) == true, 'text-gray-700 hover:bg-blue-200': isToday(date) == false }"
+                                                ></div>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
 
-					<input id="password" name="password" type="password" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required autocomplete="new-password">
-				</div>
+                            </div>
+                        </div>
 
-				<!-- Confirm Password -->
-				<div class="mt-4">
-					<label for="password_confirmation" class="block font-medium text-sm text-gray-700">
-						{{ __('Confirm Password') }}
-					</label>
+                    </div>
+                </div>
+            </div>
 
-					<input id="password_confirmation" name="password_confirmation" type="password" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
-				</div>
+            <div class="w-full px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                    Username
+                </label>
+                <input
+                    class="@error('name') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    name="name" value="{{old('name')}}" id="name" type="text" placeholder="{{fake()->userName()}}">
+                @error('name')
+                <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                @enderror
+            </div>
+            <div class="w-full px-3">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                    Password
+                </label>
+                <input
+                    class="@error('password') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    name="password" id="password" type="password" placeholder="******************">
+                @error('password')
+                <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                @enderror
+            </div>
+        </div>
+        <div class="start-0">
+            <label for="password-confirm"
+                   class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">{{ __('Confirm Password') }}</label>
 
-				<div class="flex items-center justify-end mt-4">
-					<a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-						{{ __('Already registered?') }}
-					</a>
-
-					<button type="submit" class="ml-4 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">
-						{{ __('Register') }}
-					</button>
-				</div>
-			</form>
-		</div>
-	</div>
+            <div class="col-md-6">
+                <input
+                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="password-confirm" type="password" name="password_confirmation" placeholder="******************"
+                    autocomplete="new-password">
+            </div>
+            <button
+                class=" h-10 justify-center flex flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
+                type="submit">
+                Sign Up
+            </button>
+        </div>
+    </form>
 @endsection
+
+
+
+{{--<div class="container">--}}
+{{--    <div class="row justify-content-center">--}}
+{{--        <div class="col-md-8">--}}
+{{--            <div class="card">--}}
+{{--                <div class="card-header">{{ __('Register') }}</div>--}}
+
+{{--                <div class="card-body">--}}
+{{--                    <form method="POST" action="{{ route('register') }}">--}}
+{{--                        @csrf--}}
+
+{{--                        <div class="row mb-3">--}}
+{{--                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('firstname') }}</label>--}}
+
+{{--                            <div class="col-md-6">--}}
+{{--                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>--}}
+
+{{--                                @error('name')--}}
+{{--                                <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $message }}</strong>--}}
+{{--                                    </span>--}}
+{{--                                @enderror--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+
+{{--                        <div class="row mb-3">--}}
+{{--                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>--}}
+
+{{--                            <div class="col-md-6">--}}
+{{--                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">--}}
+
+{{--                                @error('email')--}}
+{{--                                <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $message }}</strong>--}}
+{{--                                    </span>--}}
+{{--                                @enderror--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+
+{{--                        <div class="row mb-3">--}}
+{{--                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>--}}
+
+{{--                            <div class="col-md-6">--}}
+{{--                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">--}}
+
+{{--                                @error('password')--}}
+{{--                                <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $message }}</strong>--}}
+{{--                                    </span>--}}
+{{--                                @enderror--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+
+{{--                        <div class="row mb-3">--}}
+{{--                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>--}}
+
+{{--                            <div class="col-md-6">--}}
+{{--                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+
+{{--                        <div class="row mb-0">--}}
+{{--                            <div class="col-md-6 offset-md-4">--}}
+{{--                                <button type="submit" class="btn btn-primary">--}}
+{{--                                    {{ __('Register') }}--}}
+{{--                                </button>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </form>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</div>--}}
