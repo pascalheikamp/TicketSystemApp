@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\RegisterController;
 
@@ -32,7 +33,7 @@ Route::get('/student/dashboard', [StudentController::class, 'index'])->name('stu
 //Route::get('/tickets/{id}');
 //Route::get('tickets/edit/{id}');
 //Route::post('tickets/update/{id}');
-//Route::get('tickets/create');
+Route::get('tickets/create', [TicketController::class, 'create'])->name('crudticket.create');
 //Route::post('/tickets/store');
 //Route::delete('/tickets/{id}');
 

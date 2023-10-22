@@ -31,7 +31,7 @@
                      src="{{Vite::asset('resources/images/ticket.png')}}"/>
                 <button
                     class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-4 border border-blue-500 hover:border-transparent rounded">
-                    Go to create page
+                    <a href="{{route('crudticket.create')}}"> Go to create page</a>
                 </button>
             </div>
             <div class=" content-center text-center border-solid border-2 w-72 shadow-xl h-auto bg-white"><h1
