@@ -13,3 +13,8 @@
     display: flex;
     justify-content: center;
 }
+
+.dashboard-section {
+   position: relative;
+    top: 650px;
+}
