@@ -29,11 +29,11 @@ Route::prefix('admin')->middleware('auth' ,'isAdmin')->group(function () {
 //    Route::put('/ticket-status/{id}', DashboardController::class, 'ShowTickets');
 });
 Route::get('/student/dashboard', [StudentController::class, 'index'])->name('student.index');
+Route::get('tickets/create', [TicketController::class, 'create'])->name('ticket.create');
 //Route::get(/tickets', [StudentController::class, 'showTicketOverview']);
 //Route::get('/tickets/{id}');
 //Route::get('tickets/edit/{id}');
 //Route::post('tickets/update/{id}');
-Route::get('tickets/create', [TicketController::class, 'create'])->name('crudticket.create');
 //Route::post('/tickets/store');
 //Route::delete('/tickets/{id}');
 

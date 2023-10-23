@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Student;
+use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -12,8 +15,13 @@ class StudentController extends Controller
         $this->middleware('auth');
     }
     public function index() {
-        return view('pages.student.index');
+        $id = Auth::user()->id;
+        $tickets = Ticket::where('user_id', '=', $id)->get();
+        return view('pages.student.index', compact('tickets'));
     }
+
+
+
 
    /* public function GetStudent(int $studentId) {
         $student = Student::find($studentId)->width();

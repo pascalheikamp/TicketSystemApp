@@ -13,6 +13,6 @@ class TicketController extends Controller
     }
 
     public function create() {
-        return view('pages.crudticket.create');
+        return view('pages.ticket.create');
     }
 }
