@@ -44,8 +44,10 @@ class TicketController extends Controller
 
         return redirect()->route('student.index');
     }
-    public function delete(Request $request) {
-//        $id = Auth::tic
-//       $ticket = Ticket::find()
+    public function delete($id) {
+        $ticket = Ticket::find($id);
+        $ticket->delete();
+        return redirect()->route('student.index');
+//        return redirect()->route('student.index');
     }
 }

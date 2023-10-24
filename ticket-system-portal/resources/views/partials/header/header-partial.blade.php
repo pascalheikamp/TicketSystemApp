@@ -9,7 +9,7 @@
       height: 50px;
     ">
                <div
-                   class="absolute rounded-t-lg bg-indigo-500 top-1 left-0 right-10 bottom-0 h-full w-full overflow-hidden bg-fixed">
+                   class=" rounded-t-lg bg-indigo-500 top-1 left-0 right-10 bottom-0 h-full w-full overflow-hidden bg-fixed">
                    <div class="flex h-full items-center justify-center">
                        <div class="px-6 text-center text-white md:px-12">
                            <h1 class="mb-6 text-5xl font-bold"></h1>

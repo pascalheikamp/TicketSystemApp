@@ -11,11 +11,6 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
 
-    protected $table = 'users';
-    protected $primaryKey = 'id';
-    public $incrementing = true;
-    public $timestamps = true;
-
     protected $fillable = [
         'firstname',
         'lastname',

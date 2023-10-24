@@ -6,7 +6,7 @@
         <h2 class="text-xl">Description:</h2>
     </div>
     <div class="flex justify-around">
-        <h2>{{$ticket->category_id}}</h2>
+        <h2>{{($ticket->category_id)}}</h2>
         <h2>{{$ticket->description}}</h2>
     </div>
     <div class="flex justify-around mt-5">
@@ -23,15 +23,12 @@
             <img class="h-5 w-5" src="{{Vite::asset('resources/images/edit.png')}}"/>
             Edit
         </button>
-        <button
+        <form method="post" action="{{route('delete', $ticket->id)}}">
+            @csrf
+            @method('DELETE')
+        <input type="submit" value="Delete"
             class="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-md">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
-                 viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-            </svg>
-            <a href="{{route('dashboard.index')}}">Delete</a>
-        </button>
+        </form>
     </div>
 </div>
 
