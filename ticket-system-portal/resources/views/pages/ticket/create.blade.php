@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('content')
-    <form method="post" action="{{ route('student.index') }}" class=" flex flex-col mt-20 mx-auto w-full max-w-lg">
+    <form method="post" action="{{ route('store') }}" class=" flex flex-col mt-20 mx-auto w-full max-w-lg">
         @csrf
         <h1 class=" text-center text-xl font-semibold">Create ticket</h1>
         <div class=" pt-10 flex flex-wrap -mx-8 mb-6">
@@ -9,10 +9,10 @@
                     Title
                 </label>
                 <input
-                    class=" @error('firstname') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    value="{{ old('firstname') }}" name="firstname" id="firstname" type="text"
+                    class=" @error('title') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                    value="{{ old('title') }}" name="title" id="title" type="text"
                     placeholder="{{fake()->text()}}">
-                @error('firstname')
+                @error('title')
                 <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -26,10 +26,10 @@
                     <div class="relative">
                         <select
                             class="block  appearance-none w-auto bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            name='role' id="role">
-                            <option name="student" value="student">Eduction</option>
-                            <option name="teacher" value="teacher">Care and welfare</option>
-                            <option name="concierge" value="concierge">Teaching materials</option>
+                            name='category_id' id="category_id">
+                            <option name="eduction"  value="1">Eduction</option>
+                            <option name="careandwelfare" value="2">Care and welfare</option>
+                            <option name="teachingmaterials" value="3">Teaching materials</option>
                         </select>
                         <div
                             class="pointer-events-none absolute inset-y-0 right-0 justify-end flex items-end px-2 text-gray-700">
@@ -46,10 +46,10 @@
                 </label>
 
                 <textarea
-                    class="@error('lastname') border-red-500 @enderror appearance-none block w-full h-40 bg-gray-200 text-gray-700 border pb-32 border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    class="@error('description') border-red-500 @enderror appearance-none block w-full h-40 bg-gray-200 text-gray-700 border pb-32 border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="w3review" name="w3review" rows="4" cols="50" value="test">
 </textarea>
-                @error('lastname')
+                @error('description')
                 <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -63,10 +63,10 @@
                     <div class="relative">
                         <select
                             class="block  appearance-none w-auto bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            name='role' id="role">
-                            <option name="student" value="student">High</option>
-                            <option name="teacher" value="teacher">Medium</option>
-                            <option name="concierge" value="concierge">Low</option>
+                            name='priority' id="priority">
+                            <option name="high" value="high">High</option>
+                            <option name="medium" value="medium">Medium</option>
+                            <option name="low" value="low">Low</option>
                         </select>
                         <div
                             class="pointer-events-none absolute inset-y-0 right-0 justify-end flex items-end px-2 text-gray-700">

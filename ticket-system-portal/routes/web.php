@@ -30,6 +30,7 @@ Route::prefix('admin')->middleware('auth' ,'isAdmin')->group(function () {
 });
 Route::get('/student/dashboard', [StudentController::class, 'index'])->name('student.index');
 Route::get('tickets/create', [TicketController::class, 'create'])->name('ticket.create');
+Route::post('/store', [TicketController::class, 'store'])->name('store');
 //Route::get(/tickets', [StudentController::class, 'showTicketOverview']);
 //Route::get('/tickets/{id}');
 //Route::get('tickets/edit/{id}');

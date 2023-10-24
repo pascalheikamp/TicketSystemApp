@@ -13,6 +13,13 @@ class Ticket extends Model
     public $incrementing = true;
     public $timestamps = true;
 
+    protected $fillable = [
+        'title',
+        'category_id',
+        'description',
+        'priority'
+    ];
+
     public function user() {
         return $this->belongsTo(User::class);
 
