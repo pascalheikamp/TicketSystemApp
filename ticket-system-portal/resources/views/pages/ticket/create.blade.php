@@ -47,7 +47,7 @@
 
                 <textarea
                     class="@error('description') border-red-500 @enderror appearance-none block w-full h-40 bg-gray-200 text-gray-700 border pb-32 border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                    id="w3review" name="w3review" rows="4" cols="50" value="test">
+                    id="w3review" name="description" rows="4" cols="50" value="test">
 </textarea>
                 @error('description')
                 <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1" role="alert">

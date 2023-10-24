@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
+use function Laravel\Prompts\select;
 use function Webmozart\Assert\Tests\StaticAnalysis\string;
 
 class TicketController extends Controller
@@ -14,11 +17,13 @@ class TicketController extends Controller
         $this->middleware('auth');
     }
 
-    public function create() {
+    public function create()
+    {
         return view('pages.ticket.create');
     }
 
-    public function store(Request $request): \Response {
+    public function store(Request $request)
+    {
 
         $request->validate([
             'title' => ['required', 'string'],
@@ -26,21 +31,21 @@ class TicketController extends Controller
             'category_id' => ['required'],
             'priority' => ['required']
         ]);
-
+        $id = Auth::user()->id;
         Ticket::create([
-           'title' => $request->title,
-           'description' => $request->description,
-           'category_id' => $request->category_id,
-           'priority' => $request->priority
+            'user_id' => $id,
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'category_id' => $request->input('category_id'),
+            'priority' => $request->input('priority'),
+            'remove_date' => now(),
+            'status' => 0
         ]);
 
         return redirect()->route('student.index');
-//        return Ticket::create([
-//            'title' => $data['title'],
-//            'category_id' => $data ['category_id'],
-//            'description' => $data['description'],
-//            'priority' => $data['priority']
-//        ]);
-//        return redirect()->route('student.index');
+    }
+    public function delete(Request $request) {
+//        $id = Auth::tic
+//       $ticket = Ticket::find()
     }
 }

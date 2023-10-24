@@ -17,7 +17,10 @@ class Ticket extends Model
         'title',
         'category_id',
         'description',
-        'priority'
+        'priority',
+        'user_id',
+        'remove_date',
+        'status'
     ];
 
     public function user() {
