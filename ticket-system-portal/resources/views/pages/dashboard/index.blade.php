@@ -38,6 +38,10 @@
                         <h4 class="text-3xl font-medium leading-tight mt-2">20</h4>
                     </div>
                 </div>
+                    <button
+                        class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-4 border border-blue-500 hover:border-transparent rounded">
+                        <a href="{{route('ticket.overview')}}">Ticket board</a>
+                    </button>
             </div>
             <div class=" pl-2 pr-4  text-center border-solid border-2 shadow-xl w-24 max-w-md h-28 bg-white"><h5>Total
                     users</h5>

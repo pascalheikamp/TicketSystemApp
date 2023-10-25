@@ -17,6 +17,11 @@ class TicketController extends Controller
         $this->middleware('auth');
     }
 
+    public function overview() {
+        $tickets  = Ticket::all();
+        return view('pages.ticket.overview', compact('tickets'));
+    }
+
     public function create()
     {
         return view('pages.ticket.create');

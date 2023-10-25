@@ -23,7 +23,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 //admin
 Route::prefix('admin')->middleware('auth' ,'isAdmin')->group(function () {
-    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/overview/tickets', [TicketController::class, 'overview'])->name('ticket.overview');
 //    Route::get('/tickets', DashboardController::class, 'ShowTicketDetails');
 //    Route::get('/tickets/{id}', DashboardController::class, 'GetCurrentTicket');
 //    Route::put('/ticket-status/{id}', DashboardController::class, 'ShowTickets');
