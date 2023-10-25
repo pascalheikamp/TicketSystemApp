@@ -6,7 +6,7 @@
         <h2 class="text-xl">Description:</h2>
     </div>
     <div class="flex justify-around">
-        <h2>{{($ticket->category_id)}}</h2>
+        <h2>{{($ticket->category->title)}}</h2>
         <h2>{{$ticket->description}}</h2>
     </div>
     <div class="flex justify-around mt-5">
@@ -21,7 +21,7 @@
         <button
             class="inline-flex items-center px-4 py-2 bg-green-500 hover:bg-green-600 text-white text-sm font-medium rounded-md">
             <img class="h-5 w-5" src="{{Vite::asset('resources/images/edit.png')}}"/>
-            Edit
+            <a href="{{route('ticket.edit', $ticket->id)}}">Edit</a>
         </button>
         <form method="post" action="{{route('delete', $ticket->id)}}">
             @csrf

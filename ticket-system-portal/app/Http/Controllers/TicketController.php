@@ -44,10 +44,35 @@ class TicketController extends Controller
 
         return redirect()->route('student.index');
     }
-    public function delete($id) {
+
+    public function delete($id)
+    {
         $ticket = Ticket::find($id);
         $ticket->delete();
         return redirect()->route('student.index');
-//        return redirect()->route('student.index');
+    }
+
+    public function edit($id)
+    {
+        $ticket = Ticket::find($id);
+        return view('pages.ticket.edit', compact('ticket'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => ['required', 'string'],
+            'description' => ['required', 'string'],
+            'category_id' => ['required'],
+            'priority' => ['required']
+        ]);
+        $ticket = Ticket::find($id);
+        $ticket->title = $request->input('title');
+        $ticket->description = $request->input('description');
+        $ticket->category_id = $request->input('category_id');
+        $ticket->priority = $request->input('priority');
+        $ticket->update();
+
+        return redirect()->route('student.index');
     }
 }

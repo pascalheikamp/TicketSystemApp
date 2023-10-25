@@ -32,6 +32,8 @@ Route::get('/student/dashboard', [StudentController::class, 'index'])->name('stu
 Route::get('/tickets/create', [TicketController::class, 'create'])->name('ticket.create');
 Route::post('/store', [TicketController::class, 'store'])->name('store');
 Route::delete('/delete/{id}', [TicketController::class, 'delete'])->name('delete');
+Route::get('edit/{id}', [TicketController::class, 'edit'])->name('ticket.edit');
+Route::put('update/{id}', [TicketController::class, 'update'])->name('update');
 //Route::put('/edit/ticket/{id}');
 //Route::get(/tickets', [StudentController::class, 'showTicketOverview']);
 //Route::get('/tickets/{id}');
