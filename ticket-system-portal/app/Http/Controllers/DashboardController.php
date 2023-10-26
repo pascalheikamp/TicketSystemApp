@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ticket;
 use App\Models\User;
 use Couchbase\View;
 use Illuminate\Http\Request;
@@ -13,7 +14,15 @@ class DashboardController extends Controller
         $this->middleware('auth');
     }
     public function index() {
+        $tickets = Ticket::all();
         $users = User::all();
-        return view('pages.dashboard.index', compact('users'));
+        return view('pages.dashboard.index', compact('users','tickets'));
+    }
+
+    public function update_status(Request $request) {
+
+        $ticket = Ticket::find($id);
+        $ticket->status = $request->input('title');
+        $ticket->update();
     }
 }

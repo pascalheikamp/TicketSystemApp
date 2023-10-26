@@ -2,9 +2,9 @@
 @section('content')
     @include('partials.header.header-partial')
     <div class="dashboard-section">
-        <div class="p-1 text-xl text-center text-black border-1 border-black h-10 bg-gray-200"><h1>Admin</h1></div>
-        <div class=" p-10 pl-80 h-auto justify-center grid lg:grid-cols-1 gap-16 bg-gray-100">
-            <div class="col-span-2"></div>
+        <div class=" p-1 text-xl text-center text-black border-1 border-black h-10 bg-gray-200"><h1>Admin</h1></div>
+        <div class=" p-10 pl-80 h-auto justify-center grid lg:grid-cols-1 gap-8 bg-gray-100">
+            <div class="col-span-3"></div>
             <div class="content-center text-center border-solid border-2 w-72 shadow-xl h-auto bg-white"><h1
                     class=" text-2xl font-medium leading-tight pt-5 mb-5">Admin</h1>
                 <p class="pb-2">Welkom Pascal</p>
@@ -26,7 +26,43 @@
                 </div>
             </div>
             <div
-                class=" mx-auto pl-2 pr-4  text-center border-solid border-2 shadow-xl w-full max-w-md h-auto bg-white">
+                class="text-center border-solid border-2 shadow-xl w-full max-w-md h-auto bg-white">
+                <h1 class="pl-2 pr-4  text-2xl font-medium leading-tight  pt-5 mb-5">Ticket overview</h1>
+                <table class="w-auto ">
+                    <thead class="text-xs border-b-4 border-blue-700 text-black uppercase  dark:text-black">
+                    <tr>
+                        <th scope="col">Ticket id</th>
+                        <th>title</th>
+                        <th>category</th>
+                        <th>priority</th>
+                        <th>created by</th>
+                        <th>Active</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($tickets as $ticket)
+                        <tr class="bg-white ">
+                            <td>{{$ticket->id}}</td>
+                            <td>{{$ticket->title}}</td>
+                            <td>{{$ticket->category->title}}</td>
+                            <td>{{$ticket->priority}}</td>
+                            <td>{{$ticket->user->name}}</td>
+
+                            <td class="px-6 py-4 text-right">
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" value="" class="sr-only peer" checked>
+                                    <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+
+                                </label>
+
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div
+                class="  pl-2 pr-4  text-center border-solid border-2 shadow-xl w-full max-w-md h-auto bg-white">
                 <h1 class=" text-2xl font-medium leading-tight pt-5 mb-5">Ticket status</h1>
                 <div class="flex justify-around">
                     <div class="rounded-full border-blue-600 w-32 h-32 border-2">
@@ -43,14 +79,7 @@
                         <a href="{{route('ticket.overview')}}">Ticket board</a>
                     </button>
             </div>
-            <div class=" pl-2 pr-4  text-center border-solid border-2 shadow-xl w-24 max-w-md h-28 bg-white"><h5>Total
-                    users</h5>
-                <h2 class="font-bold">{{count($users)}}</h2>
-                <img class="w-6 mx-auto mb-2" src="{{Vite::asset('resources/images/users.png')}}">
-            </div>
-            <div class="ml-9 pl-10 pb-10 pr-10 text-center w-full border-solid border-2 shadow-xl h-auto bg-white"><h1
-                    class=" text-3xl font-medium leading-tight pt-5 mb-5">Overview users</h1>
-                <table class=" table-fixed">
+                <table class=" w-auto table-fixed">
                     <thead class="text-xs text-gray-700 uppercase bg-blue-600 dark:bg-blue-700 dark:text-white">
                     <tr>
                         <th scope="col">Firstname</th>
@@ -100,7 +129,5 @@
                     @endforeach
                     </tbody>
                 </table>
-            </div>
-        </div>
     </div>
 @endsection

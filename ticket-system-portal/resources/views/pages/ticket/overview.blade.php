@@ -22,6 +22,7 @@
         <div class="content-center pb-7 pr-5 pl-5 text-center border-solid border-2 w-72 shadow-xl h-auto bg-white"><h1
                 class=" text-2xl font-medium leading-tight pt-5 mb-5">To Do</h1>
             @foreach($tickets as $ticket)
+                @if($ticket->status == 1)
                 <div class="mt-10 cursor-pointer border-black shadow-2xl rounded w-auto bg-indigo-950 text-white" id="draggable1" ondragstart="drag(event)" draggable="true">
                     <h2 class="text-xl">{{$ticket->title}}</h2>
                     <div class="border-2 border-black text-gray-950 bg-indigo-200">
@@ -32,6 +33,7 @@
                         <p> Created at: {{$ticket->created_at}}</p>
                     </div>
                 </div>
+                @endif
             @endforeach
         </div>
         <div class="content-center pb-7 pr-5 pl-5 text-center border-solid border-2 w-72 shadow-xl h-auto bg-white"><h1
