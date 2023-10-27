@@ -1,13 +1,31 @@
 <!doctype html>
 <html lang="en">
 <head>
-   @yield('pagescript')
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/ticket.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script type="module">
+        $(".toggle").on('change', function () {
+            var status = $(this).prop('checked') == true ? 1 : 0;
+            var ticket_id = $(this).data('id');
+
+            $.ajax({
+                type: 'GET',
+                dataType: 'JSON',
+                url: '{{route('update.status')}}',
+                data: {
+                    'status': status,
+                    'ticket_id': ticket_id
+                },
+                success:function (data) {
+                    $('#notiDiv').fadeIn();
+                }
+            })
+        })
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Ticket portal</title>
 </head>
 <body>
 <nav class="fixed w-full flex items-center justify-between flex-wrap bg-indigo-950 p-6">
@@ -16,8 +34,11 @@
         <span class="font-semibold text-xl tracking-tight">Ticket system portal</span>
     </div>
     <div class="block lg:hidden">
-        <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
-            <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+        <button
+            class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+            <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title>
+                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
+            </svg>
         </button>
     </div>
     <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
@@ -46,11 +67,13 @@
             @endif
         @else
             <li class="nav-item dropdown list-none flex content-around">
-                <a href="#responsive-header" class="mr-10 block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white">
+                <a href="#responsive-header"
+                   class="mr-10 block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white">
                     {{ Auth::user()->name }}
                 </a>
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <a class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white" href="{{ route('logout') }}"
+                    <a class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white"
+                       href="{{ route('logout') }}"
                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                         {{ __('Logout') }}
@@ -68,7 +91,7 @@
     @include('partials.sidebar.sidebar');
 </div>
 <main class="main-content">
-@yield('content')
+    @yield('content')
 </main>
 <footer>
 

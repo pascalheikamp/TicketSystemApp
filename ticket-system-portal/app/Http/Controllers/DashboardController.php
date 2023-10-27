@@ -21,8 +21,9 @@ class DashboardController extends Controller
 
     public function update_status(Request $request) {
 
-        $ticket = Ticket::find($id);
-        $ticket->status = $request->input('title');
+        $ticket = Ticket::find($request->ticket_id);
+        $ticket->status = $request->status;
         $ticket->update();
+        return response()->json(['success' => 'Status successfully changed']);
     }
 }

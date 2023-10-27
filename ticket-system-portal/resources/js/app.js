@@ -1,7 +1,10 @@
 import './bootstrap';
 import './calender.js';
 import './ticket.js';
-import  'jquery';
+import './toggle.js';
+import jQuery from 'jquery';
+window.$ = jQuery;
+
 
 import.meta.glob([
     '../images/**',
