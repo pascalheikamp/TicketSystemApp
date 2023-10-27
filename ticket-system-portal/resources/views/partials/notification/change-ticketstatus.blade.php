@@ -1,4 +1,3 @@
-@extends('layouts.layout')
 <div class="flex h-screen">
     <div class="m-auto">
         <div id="notiDiv" class="bg-white rounded-lg border-gray-300 border p-3 shadow-lg">

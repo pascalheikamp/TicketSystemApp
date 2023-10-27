@@ -1,9 +1,7 @@
 @extends('layouts.layout')
 @section('content')
-    @include('partials.header.header-partial')
     <div class="dashboard-section">
-        <div class="p-1 text-xl text-center text-black border-1 border-black h-10 bg-gray-200"><h1>Student</h1></div>
-        <div class=" p-10 pl-80 h-auto justify-center grid lg:grid-cols-20 gap-32 bg-gray-100">
+        <div class=" mt-14 p-10 pl-80 h-auto justify-center grid lg:grid-cols-20 gap-8 bg-gray-100">
             <div class="col-span-3"></div>
             <div class="content-center text-center border-solid border-2 w-72 shadow-xl h-auto bg-white"><h1
                     class=" text-2xl font-medium leading-tight pt-5 mb-5">Profile</h1>

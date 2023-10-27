@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Ticket;
 use App\Models\User;
 use Couchbase\View;
@@ -15,8 +16,9 @@ class DashboardController extends Controller
     }
     public function index() {
         $tickets = Ticket::all();
+        $categories = Category::all();
         $users = User::all();
-        return view('pages.dashboard.index', compact('users','tickets'));
+        return view('pages.dashboard.index', compact('users','tickets', 'categories'));
     }
 
     public function update_status(Request $request) {
@@ -25,5 +27,9 @@ class DashboardController extends Controller
         $ticket->status = $request->status;
         $ticket->update();
         return response()->json(['success' => 'Status successfully changed']);
+    }
+
+    public function filter_category() {
+
     }
 }

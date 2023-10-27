@@ -1,8 +1,5 @@
 @extends('layouts.layout')
 @section('content')
-    <div class="container w-auto flex mx-auto justify-center mt-36 h-auto">
-        <button class="test mx-auto btn btn-success">Click Me</button>
-        </div>
     @if (session('message'))
         <div class="container w-auto flex mx-auto justify-center mt-36 h-auto">
             <div

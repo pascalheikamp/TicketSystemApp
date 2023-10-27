@@ -30,12 +30,16 @@ Route::prefix('admin')->middleware('auth' ,'isAdmin')->group(function () {
 //    Route::get('/tickets/{id}', DashboardController::class, 'GetCurrentTicket');
 //    Route::put('/ticket-status/{id}', DashboardController::class, 'ShowTickets');
 });
-Route::get('/student/dashboard', [StudentController::class, 'index'])->name('student.index');
-Route::get('/tickets/create', [TicketController::class, 'create'])->name('ticket.create');
-Route::post('/store', [TicketController::class, 'store'])->name('store');
-Route::delete('/delete/{id}', [TicketController::class, 'delete'])->name('delete');
-Route::get('edit/{id}', [TicketController::class, 'edit'])->name('ticket.edit');
-Route::put('update/{id}', [TicketController::class, 'update'])->name('update');
+
+Route::prefix('student')->middleware('auth', 'isStudent')->group(function() {
+    Route::get('/dashboard', [StudentController::class, 'index'])->name('student.index');
+    Route::get('/tickets/create', [TicketController::class, 'create'])->name('ticket.create');
+    Route::post('/store', [TicketController::class, 'store'])->name('store');
+    Route::delete('/delete/{id}', [TicketController::class, 'delete'])->name('delete');
+    Route::get('edit/{id}', [TicketController::class, 'edit'])->name('ticket.edit');
+    Route::put('update/{id}', [TicketController::class, 'update'])->name('update');
+});
+
 //Route::put('/edit/ticket/{id}');
 //Route::get(/tickets', [StudentController::class, 'showTicketOverview']);
 //Route::get('/tickets/{id}');
