@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @yield('filter')
     <script type="module">
+        //toggle function
         $(".toggle").on('change', function () {
             var status = $(this).prop('checked') == true ? 1 : 0;
             var ticket_id = $(this).data('id');
@@ -15,8 +17,61 @@
                     'status': status,
                     'ticket_id': ticket_id
                 },
-                success:function (data) {
+                success: function (data) {
                     $('#notiDiv').fadeIn();
+                }
+            })
+        })
+        // filter function to find user with text input
+        {{--$(document).ready(function () {--}}
+        {{--    var table = $('#dateable').DataTable({--}}
+        {{--        'processing':true,--}}
+        {{--        'serverSide':true,--}}
+        {{--        'ajax': "{{route('dashboard.index')}}",--}}
+        {{--        'columns': [--}}
+        {{--            {'data': 'first_name'},--}}
+        {{--            {'data': 'last_name'},--}}
+        {{--            {'data': 'email'}--}}
+        {{--        ]--}}
+        {{--    });--}}
+
+        {{--    $('.filter-input').keyup(function () {--}}
+        {{--        table.column($(this).data('column'))--}}
+        {{--            .search($(this).val()).draw();--}}
+        {{--    });--}}
+        {{--})--}}
+        //filter function to find selected category
+        $(".category").on('change', function () {
+            var category = $('#category_id').val();
+
+
+            $.ajax({
+                type: 'GET',
+                dataType: 'JSON',
+                url: '{{route('filter.ticket')}}',
+                data: {
+                    'category': category
+                },
+                success: function (data) {
+                    var tickets = data.tickets;
+                    console.log(tickets)
+                    var html = '';
+                    if (tickets.length > 0) {
+                        for (let index = 0; index < tickets.length; index++) {
+                            html += '<tr>\
+                        <td>'+tickets[index]['id']+'</td>\
+                        <td>'+tickets[index]['title']+'</td>\
+                        \<td>'+tickets[index]['category']+'</td>\
+                        <td>'+tickets[index]['priority']+'</td>\
+                        </tr>';
+                        }
+
+                    } else {
+                        html += '<tr>\
+                        <td>No tickets found</td>\
+                        </tr>';
+                    }
+                    $('#tbody').html(html);
                 }
             })
         })

@@ -1,6 +1,11 @@
 @extends('layouts.layout')
-@section('content')
+{{--@section('toggle-script')--}}
+{{--    <script>--}}
 
+{{--    </script>--}}
+
+{{--@endsection--}}
+@section('content')
     <div class="dashboard-section">
         <div class=" mt-16 p-10 pl-80 h-auto justify-center grid lg:grid-cols-2 gap-8 bg-gray-100">
             <div class="col-span-2"></div>
@@ -45,19 +50,14 @@
             <div class="pl-2 pr-4   text-center border-solid border-2 shadow-xl w-full max-w-md h-auto bg-white">
                 <h1 class=" text-2xl font-medium leading-tight pt-5 mb-5">Ticket overview</h1>
                 <div class="p-10">
-
-                    <div class="dropdown inline-block">
-                        <button class="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">
-                            <span class="mr-1">Category</span>
-                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
-                        </button>
-                        <ul class="dropdown-menu absolute hidden text-gray-700 pt-1">
-                            @foreach($categories as $category)
-                            <li> <option class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">{{$category->title}}</option> </li>
-                            @endforeach
-                        </ul>
+                    <div class="text-left">
+                    <label>Select category</label>
                     </div>
-
+                            <select name="category" id="category_id" class="category flex flex-start">
+                            @foreach($categories as $category)
+                             <option value="{{$category->id}}" class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">{{$category->title}}</option>
+                            @endforeach
+                            </select>
                 </div>
                 <table class="w-auto ">
                     <thead class="text-xs border-b-4 border-blue-700 text-black uppercase  dark:text-black">
@@ -70,7 +70,7 @@
                         <th>Active</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbody">
                     @foreach($tickets as $ticket)
                         <tr class="bg-white ">
                             <td>{{$ticket->id}}</td>
@@ -92,10 +92,10 @@
             </div>
             <div></div>
             <div>
-                <table class=" w-auto table-fixed">
+                <table id="#dateable" class=" w-auto table-fixed">
                     <div class="pb-5">
                         <label>Search:</label>
-                    <input class="border-2 rounded border-black" type="text">
+                    <input class="border-2 rounded border-black filter-input" data-column="0" type="text">
                     </div>
                     <thead class="text-xs text-gray-700 uppercase bg-blue-600 dark:bg-blue-700 dark:text-white">
                     <tr>
@@ -125,17 +125,5 @@
             </div>
     </div>
 @endsection
-        <script>
-        var test = $('toggle').val()
-        console.log(test);
 
-            {{--$.ajax({--}}
-            {{--    type: 'GET',--}}
-            {{--    dataType: 'JSON',--}}
-            {{--    url:'{{route('update.status')}}',--}}
-            {{--    data: {--}}
-
-            {{--    }--}}
-            {{--})--}}
-        </script>
 

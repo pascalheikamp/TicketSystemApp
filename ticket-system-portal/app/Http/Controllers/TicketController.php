@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Ticket;
@@ -79,5 +80,24 @@ class TicketController extends Controller
         $ticket->update();
 
         return redirect()->route('student.index');
+    }
+
+    public function update_status(Request $request) {
+
+        $ticket = Ticket::find($request->ticket_id);
+        $ticket->status = $request->status;
+        $ticket->update();
+        return response()->json(['success' => 'Status successfully changed']);
+    }
+    public function filterTicket(Request $request) {
+        $query = Ticket::query();
+        $categories = Category::all();
+
+        if($request->ajax()) {
+           $tickets =  $query->where(['category_id' => $request->category])->get();
+           return response()->json(['tickets'=>$tickets]);
+        }
+    $tickets = $query->get();
+        return view('pages.dashboard.index', compact('categories', 'tickets'));
     }
 }
