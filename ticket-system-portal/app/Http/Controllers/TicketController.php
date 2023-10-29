@@ -92,11 +92,13 @@ class TicketController extends Controller
     public function filterTicket(Request $request) {
         $query = Ticket::query();
         $categories = Category::all();
+    if(empty($request->category)){
 
-        if($request->ajax()) {
-           $tickets =  $query->where(['category_id' => $request->category])->get();
-           return response()->json(['tickets'=>$tickets]);
-        }
+    } else {
+        $tickets =  $query->where(['category_id' => $request->category])->get();
+        return response()->json(['tickets'=>$tickets]);
+    }
+
     $tickets = $query->get();
         return view('pages.dashboard.index', compact('categories', 'tickets'));
     }
