@@ -34,6 +34,9 @@ Route::prefix('admin')->middleware('auth' ,'isAdmin')->group(function () {
 
 Route::prefix('student')->middleware('auth', 'isStudent')->group(function() {
     Route::get('/dashboard', [StudentController::class, 'index'])->name('student.index');
+    Route::get('/profile', [StudentController::class, 'show_profile'])->name('student.profile');
+    Route::get('profile/edit/{id}', [StudentController::class, 'edit_profile'])->name('edit.profile');
+    Route::put('update/profile/{id}', [StudentController::class, 'update_profile'])->name('update.profile');
     Route::get('/tickets/create', [TicketController::class, 'create'])->name('ticket.create');
     Route::post('/store', [TicketController::class, 'store'])->name('store');
     Route::delete('/delete/{id}', [TicketController::class, 'delete'])->name('delete');

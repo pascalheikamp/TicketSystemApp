@@ -20,6 +20,32 @@ class StudentController extends Controller
         return view('pages.student.index', compact('tickets'));
     }
 
+    public function show_profile() {
+        return view('pages.student.profile');
+    }
+
+    public function edit_profile() {
+        return view('pages.student.edit_profile');
+    }
+
+    public function update_profile(Request $request, $id) {
+        $request->validate([
+            'firstname' => ['required', 'string'],
+            'lastname' => ['required', 'string'],
+            'name' => ['required', 'string'],
+            'date_of_birth' => ['required'],
+            'email' => ['required']
+        ]);
+        $ticket = User::find($id);
+        $ticket->title = $request->input('title');
+        $ticket->description = $request->input('description');
+        $ticket->category_id = $request->input('category_id');
+        $ticket->priority = $request->input('priority');
+        $ticket->update();
+
+        return redirect()->route('student.index');
+    }
+
 
 
 
