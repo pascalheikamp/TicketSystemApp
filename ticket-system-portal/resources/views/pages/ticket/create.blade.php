@@ -12,7 +12,7 @@
                 <input
                     class=" @error('title') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                     value="{{ old('title') }}" name="title" id="title" type="text"
-                    placeholder="{{fake()->text()}}">
+                    placeholder="Title">
                 @error('title')
                 <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -28,7 +28,7 @@
                         <select
                             class="block  appearance-none w-auto bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                             name='category_id' id="category_id">
-                            <option name="eduction"  value="1">Eduction</option>
+                            <option name="eduction"  value="1">Education</option>
                             <option name="careandwelfare" value="2">Care and welfare</option>
                             <option name="teachingmaterials" value="3">Teaching materials</option>
                         </select>

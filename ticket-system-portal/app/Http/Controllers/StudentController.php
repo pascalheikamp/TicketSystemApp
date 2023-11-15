@@ -8,6 +8,7 @@ use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Mockery\Exception;
 
 class StudentController extends Controller
 {
@@ -20,12 +21,22 @@ class StudentController extends Controller
         return view('pages.student.index', compact('tickets'));
     }
 
+    public function show_error() {
+        return view('pages.error.unauthorized_error');
+    }
+
     public function show_profile() {
         return view('pages.student.profile');
     }
 
-    public function edit_profile() {
-        return view('pages.student.edit_profile');
+    public function edit_profile($id) {
+        $user = User::find($id);
+           if($user->id == Auth::user()->id) {
+               return view('pages.student.edit_profile', compact('user'));
+           }
+           else {
+               return redirect('student/error/unauthorized')->with('unauthorized', 'You are not authorized to visit this page');
+           }
     }
 
     public function update_profile(Request $request, $id) {
@@ -34,14 +45,17 @@ class StudentController extends Controller
             'lastname' => ['required', 'string'],
             'name' => ['required', 'string'],
             'date_of_birth' => ['required'],
+            'address' => ['required', 'string'],
             'email' => ['required']
         ]);
-        $ticket = User::find($id);
-        $ticket->title = $request->input('title');
-        $ticket->description = $request->input('description');
-        $ticket->category_id = $request->input('category_id');
-        $ticket->priority = $request->input('priority');
-        $ticket->update();
+        $user = User::find($id);
+        $user->firstname = $request->input('firstname');
+        $user->lastname = $request->input('lastname');
+        $user->name = $request->input('name');
+        $user->date_of_birth = $request->input('date_of_birth');
+        $user->address = $request->input('address');
+        $user->email = $request->input('email');
+        $user->update();
 
         return redirect()->route('student.index');
     }

@@ -30,7 +30,7 @@ function app() {
             let selectedDate = new Date(this.year, this.month, date);
             this.datepickerValue = selectedDate.toDateString();
 
-            this.$refs.date.value = selectedDate.getFullYear() +"-"+ ('0'+ selectedDate.getMonth()).slice(-2) +"-"+ ('0' + selectedDate.getDate()).slice(-2);
+            this.$refs.date.value = selectedDate.getFullYear() + "-" + ('0' + selectedDate.getMonth()).slice(-2) + "-" + ('0' + selectedDate.getDate()).slice(-2);
 
             console.log(this.$refs.date.value);
 
@@ -43,12 +43,12 @@ function app() {
             // find where to start calendar day of week
             let dayOfWeek = new Date(this.year, this.month).getDay();
             let blankdaysArray = [];
-            for ( var i=1; i <= dayOfWeek; i++) {
+            for (var i = 1; i <= dayOfWeek; i++) {
                 blankdaysArray.push(i);
             }
 
             let daysArray = [];
-            for ( var i=1; i <= daysInMonth; i++) {
+            for (var i = 1; i <= daysInMonth; i++) {
                 daysArray.push(i);
             }
 
@@ -56,8 +56,4 @@ function app() {
             this.no_of_days = daysArray;
         }
     }
-}
-
-function test() {
-    alert('hello')
 }

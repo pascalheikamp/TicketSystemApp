@@ -63,7 +63,8 @@
             }
         }
     </script>
-    <form method="post" action="{{ route('update.profile', Auth::user()->id) }}" class=" flex flex-col mt-20 mx-auto w-full max-w-lg">
+    <form method="post" action="{{ route('update.profile',$user->id) }}"
+          class=" flex flex-col mt-20 mx-auto w-full max-w-lg">
         @csrf
         @method('PUT')
         <h1 class=" text-center text-xl font-semibold">Edit personal information</h1>
@@ -73,22 +74,22 @@
                     firstname
                 </label>
                 <input
-                    class=" @error('title') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    value="{{Auth::user()->firstname}}" name="title" id="title" type="text"
+                    class=" @error('firstname') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                    value="{{$user->firstname}}" name="firstname" id="firstname" type="text"
                 >
-                @error('title')
+                @error('firstname')
                 <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                 @enderror
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="firstname">
-                   username
+                    username
                 </label>
                 <input
-                    class=" @error('title') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    value="{{Auth::user()->firstname}}" name="title" id="title" type="text"
+                    class=" @error('name') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                    value="{{$user->name}}" name="name" id="name" type="text"
                 >
-                @error('title')
+                @error('name')
                 <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -100,10 +101,10 @@
                     Lastname
                 </label>
                 <input
-                    class=" @error('title') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    value="{{Auth::user()->firstname}}" name="title" id="title" type="text"
+                    class=" @error('lastname') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                    value="{{$user->lastname}}" name="lastname" id="lastname" type="text"
                 >
-                @error('title')
+                @error('lastname')
                 <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -112,10 +113,10 @@
                     Email
                 </label>
                 <input
-                    class=" @error('title') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    value="{{Auth::user()->firstname}}" name="title" id="title" type="text"
+                    class=" @error('email') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                    value="{{$user->email}}" name="email" id="email" type="text"
                 >
-                @error('title')
+                @error('email')
                 <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -149,15 +150,12 @@
                                 </div>
                                 <div>
                                     @error('date_of_birth')
-                                    <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1" role="alert">
+                                    <span
+                                        class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1"
+                                        role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>@enderror
                                 </div>
-
-                                <!-- <div x-text="no_of_days.length"></div>
-                                <div x-text="32 - new Date(year, month, 32).getDate()"></div>
-                                <div x-text="new Date(year, month).getDay()"></div> -->
-
                                 <div
                                     class="bg-white mt-12 rounded-lg shadow p-4 absolute top-0 left-0"
                                     style="width: 17rem"
@@ -239,22 +237,10 @@
                     Address
                 </label>
                 <input
-                    class=" @error('title') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    value="{{Auth::user()->firstname}}" name="title" id="title" type="text"
+                    class=" @error('address') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                    value="{{$user->address}}" name="address" id="address" type="text"
                 >
-                @error('title')
-                <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                @enderror
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="firstname">
-                    password
-                </label>
-                <input
-                    class=" @error('title') border-red-500 @enderror appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                    value="{{Auth::user()->firstname}}" name="title" id="title" type="text"
-                >
-                @error('title')
+                @error('address')
                 <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

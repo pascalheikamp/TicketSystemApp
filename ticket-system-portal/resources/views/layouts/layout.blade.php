@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400&display=swap');
+    </style>
     @yield('filter')
     <script type="module">
         //toggle function

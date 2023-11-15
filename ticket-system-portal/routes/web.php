@@ -33,6 +33,7 @@ Route::prefix('admin')->middleware('auth' ,'isAdmin')->group(function () {
 });
 
 Route::prefix('student')->middleware('auth', 'isStudent')->group(function() {
+    Route::get('/error/unauthorized', [StudentController::class, 'show_error'])->name('error');
     Route::get('/dashboard', [StudentController::class, 'index'])->name('student.index');
     Route::get('/profile', [StudentController::class, 'show_profile'])->name('student.profile');
     Route::get('profile/edit/{id}', [StudentController::class, 'edit_profile'])->name('edit.profile');

@@ -10,7 +10,7 @@ class Category extends Model
     public $incrementing = true;
     public $timestamps = true;
 
-    public function ticket() {
-        return $this->belongsTo(Ticket::class);
+    public function tickets() {
+        return $this->hasMany(Ticket::class);
     }
 }
