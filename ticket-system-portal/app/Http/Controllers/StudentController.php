@@ -22,7 +22,7 @@ class StudentController extends Controller
     }
 
     public function show_error() {
-        return view('pages.error.unauthorized_error');
+        return view('pages.error.forbidden_editprofile');
     }
 
     public function show_profile() {
@@ -35,7 +35,7 @@ class StudentController extends Controller
                return view('pages.student.edit_profile', compact('user'));
            }
            else {
-               return redirect('student/error/unauthorized')->with('unauthorized', 'You are not authorized to visit this page');
+               return redirect('student/profile/error/forbidden')->with('forbidden', 'Access to this resource on the server is denied!');
            }
     }
 

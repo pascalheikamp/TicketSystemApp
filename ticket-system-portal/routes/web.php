@@ -33,7 +33,7 @@ Route::prefix('admin')->middleware('auth' ,'isAdmin')->group(function () {
 });
 
 Route::prefix('student')->middleware('auth', 'isStudent')->group(function() {
-    Route::get('/error/unauthorized', [StudentController::class, 'show_error'])->name('error');
+    Route::get('profile/error/forbidden', [StudentController::class, 'show_error'])->name('error');
     Route::get('/dashboard', [StudentController::class, 'index'])->name('student.index');
     Route::get('/profile', [StudentController::class, 'show_profile'])->name('student.profile');
     Route::get('profile/edit/{id}', [StudentController::class, 'edit_profile'])->name('edit.profile');
@@ -41,8 +41,8 @@ Route::prefix('student')->middleware('auth', 'isStudent')->group(function() {
     Route::get('/tickets/create', [TicketController::class, 'create'])->name('ticket.create');
     Route::post('/store', [TicketController::class, 'store'])->name('store');
     Route::delete('/delete/{id}', [TicketController::class, 'delete'])->name('delete');
-    Route::get('edit/{id}', [TicketController::class, 'edit'])->name('ticket.edit');
-    Route::put('update/{id}', [TicketController::class, 'update'])->name('update');
+    Route::get('ticket/edit/{id}', [TicketController::class, 'edit'])->name('ticket.edit');
+    Route::put('ticket/update/{id}', [TicketController::class, 'update'])->name('update');
 });
 
 //Route::put('/edit/ticket/{id}');

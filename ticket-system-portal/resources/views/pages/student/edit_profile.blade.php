@@ -131,7 +131,7 @@
                                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Date of
                                 birth</label>
                             <div class="relative">
-                                <input type="hidden" name="date_of_birth" x-ref="date">
+                                <input type="hidden" value="{{$user->date_of_birth}}" name="date_of_birth" x-ref="date">
                                 <input
                                     type="text"
                                     readonly
