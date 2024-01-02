@@ -1,6 +1,5 @@
 import './bootstrap';
-import './calendar.js';
-import './ticket.js';
+import './filter.js';
 import './toggle.js';
 import jQuery from 'jquery';
 window.$ = jQuery;

@@ -21,6 +21,12 @@ class DashboardController extends Controller
         return view('pages.dashboard.index', compact('users','tickets', 'categories'));
     }
 
+    public function filter_user(Request $request) {
+        $user = User::where('name', 'like', "%" . $request->nonFilteredUser . "%")
+            ->get();
+        return response()->json(['filterEventUser' => $user]);
+    }
+
 
 
 //    public function index(Request $request)

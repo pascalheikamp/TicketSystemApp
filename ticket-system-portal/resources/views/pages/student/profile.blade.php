@@ -25,6 +25,7 @@
                     </div>
                     <div class="ml-20">
                         <h2 class=" mx-auto text-xl">School information:</h2>
+                        <button onclick="test()">Test button</button>
                         <ul>
                             <li>Student number:{{Auth::user()->student_number}}</li>
                             <li>Class:{{Auth::user()->klas}}</li>

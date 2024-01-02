@@ -95,7 +95,8 @@
                 <table id="#dateable" class=" w-auto table-fixed">
                     <div class="pb-5">
                         <label>Search:</label>
-                    <input class="border-2 rounded border-black filter-input" data-column="0" type="text">
+                    <input list="filteredUserOptions" id="search" class="border-2 rounded border-black filter-input" data-column="0" type="text">
+                        <datalist id="filteredUserOptions"></datalist>
                     </div>
                     <thead class="text-xs text-gray-700 uppercase bg-blue-600 dark:bg-blue-700 dark:text-white">
                     <tr>

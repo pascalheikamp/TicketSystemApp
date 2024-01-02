@@ -27,6 +27,7 @@ Route::prefix('admin')->middleware('auth' ,'isAdmin')->group(function () {
     Route::get('/overview/tickets', [TicketController::class, 'overview'])->name('ticket.overview');
     Route::get('update/status/', [TicketController::class, 'update_status'])->name('update.status');
     Route::get('category/', [TicketController::class, 'filterTicket'])->name('filter.ticket');
+    Route::post('user/filter', [DashboardController::class, 'filter_user']);
 //    Route::get('/tickets', DashboardController::class, 'ShowTicketDetails');
 //    Route::get('/tickets/{id}', DashboardController::class, 'GetCurrentTicket');
 //    Route::put('/ticket-status/{id}', DashboardController::class, 'ShowTickets');
