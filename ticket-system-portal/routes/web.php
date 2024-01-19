@@ -25,8 +25,10 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::prefix('admin')->middleware('auth' ,'isAdmin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/overview/tickets', [TicketController::class, 'overview'])->name('ticket.overview');
-    Route::get('update/status/', [TicketController::class, 'update_status'])->name('update.status');
+    Route::get('ticket/review/{id}', [TicketController::class, 'review'])->name('ticket.review');
+    Route::post('/test', [TicketController::class, 'send_review'])->name('reviewed');
     Route::get('category/', [TicketController::class, 'filterTicket'])->name('filter.ticket');
+    Route::post('/update/status', [TicketController::class, 'update_status'])->name('update.status');
     Route::post('user/filter', [DashboardController::class, 'filter_user']);
 //    Route::get('/tickets', DashboardController::class, 'ShowTicketDetails');
 //    Route::get('/tickets/{id}', DashboardController::class, 'GetCurrentTicket');
@@ -39,7 +41,8 @@ Route::prefix('student')->middleware('auth', 'isStudent')->group(function() {
     Route::get('/profile', [StudentController::class, 'show_profile'])->name('student.profile');
     Route::get('profile/edit/{id}', [StudentController::class, 'edit_profile'])->name('edit.profile');
     Route::put('update/profile/{id}', [StudentController::class, 'update_profile'])->name('update.profile');
-    Route::get('/tickets/create', [TicketController::class, 'create'])->name('ticket.create');
+    Route::get('/tickets/create', [TicketController::class, 'create'])->name('ticket.create')->middleware('createTicket');
+    Route::get('view/ticket/status', [TicketController::class, 'view_status'])->name('ticket.status');
     Route::post('/store', [TicketController::class, 'store'])->name('store');
     Route::delete('/delete/{id}', [TicketController::class, 'delete'])->name('delete');
     Route::get('ticket/edit/{id}', [TicketController::class, 'edit'])->name('ticket.edit');

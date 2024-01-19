@@ -31,6 +31,7 @@
                         <p> Description: {{$ticket->description}}</p>
                         <p> Created by: {{$ticket->user->name}}</p>
                         <p> Created at: {{$ticket->created_at}}</p>
+                        <button class="mt-5 inline-flex items-center px-4 py-2 bg-green-500 hover:bg-green-600 text-white text-sm font-medium rounded-md"><a href="{{route('ticket.review', $ticket->id)}}">Add review</a></button>
                     </div>
                 </div>
                 @endif

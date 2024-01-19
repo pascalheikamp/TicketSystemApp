@@ -20,9 +20,9 @@ searchInput.addEventListener('keyup', async function () {
         displayResults(data)
     });
 
-    async function displayResults(results) {
+     function displayResults(results) {
         for (let i = 0; i < results.filterEventUser.length; i++) {
-           await  console.log("data: " + results.filterEventUser[i].name);
+            console.log("data: " + results.filterEventUser[i].name);
             let option = document.createElement("option");
             option.textContent = results.filterEventUser[i].name;
             datalist.appendChild(option);

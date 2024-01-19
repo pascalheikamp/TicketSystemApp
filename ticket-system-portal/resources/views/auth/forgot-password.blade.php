@@ -14,7 +14,7 @@
 				{{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
 			</div>
 
-			<!-- Session Status -->
+			<!-- Session Progression -->
 			<div class="mb-4 font-medium text-sm text-green-600">
 				{{ session('status') }}
 			</div>

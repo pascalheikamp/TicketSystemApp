@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Review;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Ticket;
@@ -23,6 +24,34 @@ class TicketController extends Controller
         return view('pages.ticket.overview', compact('tickets'));
     }
 
+    public function review($id) {
+        $ticket = Ticket::find($id);
+        return view('pages.ticket.review-ticket', compact('ticket'));
+    }
+
+    public function send_review(Request $request) {
+        $request->validate([
+            'reviewed_by' => ['required', 'string'],
+            'solution' => ['required', 'string'],
+        ]);
+
+        $id=$request->ticket_id;
+//dd($id);
+        Review::create([
+            'ticket_id' => $id,
+            'reviewed_by' => $request->input('reviewedby'),
+            'is_reviewed' => 1,
+            'solution' => $request->input('solution')
+        ]);
+
+        return redirect()->route('dashboard.index');
+    }
+
+    public function view_status() {
+        $reviews = Review::all();
+       return view('pages.student.ticket-status', compact('reviews'));
+    }
+
     public function create()
     {
         return view('pages.ticket.create');
@@ -30,7 +59,6 @@ class TicketController extends Controller
 
     public function store(Request $request)
     {
-
         $request->validate([
             'title' => ['required', 'string'],
             'description' => ['required', 'string'],
@@ -83,11 +111,12 @@ class TicketController extends Controller
     }
 
     public function update_status(Request $request) {
+//        error_log("here ". $request);
+        Ticket::find($request->nonFilteredUser)
+        ->update(['status' => $request->status]);
 
-        $ticket = Ticket::find($request->ticket_id);
-        $ticket->status = $request->status;
-        $ticket->update();
-        return response()->json(['success' => 'Status successfully changed']);
+        $ticket = Ticket::find($request->nonFilteredUser);
+        return response()->json(['success' => $ticket->status]);
     }
     public function filterTicket(Request $request) {
         $query = Ticket::query();

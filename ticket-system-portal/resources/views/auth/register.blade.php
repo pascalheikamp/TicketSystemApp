@@ -39,8 +39,9 @@
             getDateValue(date) {
                 let selectedDate = new Date(this.year, this.month, date);
                 this.datepickerValue = selectedDate.toDateString();
+                console.log("here " + selectedDate.getMonth());
 
-                this.$refs.date.value = selectedDate.getFullYear() + "-" + ('0' + selectedDate.getMonth()).slice(-2) + "-" + ('0' + selectedDate.getDate()).slice(-2);
+                this.$refs.date.value = selectedDate.getFullYear() + "-" + ('0' + (selectedDate.getMonth() + 1)).slice(-2) + "-" + ('0' + selectedDate.getDate()).slice(-2);
 
                 console.log(this.$refs.date.value);
 
@@ -48,7 +49,7 @@
             },
 
             getNoOfDays() {
-                let daysInMonth = new Date(this.year, this.month + 1, 0).getDate();
+                let daysInMonth = new Date(this.year, this.month, 0).getDate();
 
                 // find where to start calendar day of week
                 let dayOfWeek = new Date(this.year, this.month).getDay();

@@ -20,19 +20,19 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'name' => 'pascal',
+            'email' => 'pascal@example.com',
             'email_verified_at' => now(),
             'student_number' => fake()->unique()->numerify(),
-            'firstname' => fake()->firstName(),
-            'lastname' => fake()->lastName(),
-            'date_of_birth' => fake()->date(),
-            'klas' => fake()->name(),
+            'firstname' =>  'Pascal',
+            'lastname' => 'Heikamp',
+            'date_of_birth' => fake()->dateTime,
+            'klas' => '',
             'address' => fake()->address(),
-            'role'=> 'student',
-            'login_limit' => 10,
+            'role'=> 'admin',
+            'login_limit' => 0,
             'login_time' => fake()->dateTime(),
-            'password' => fake()->unique()->password(5, 20), // password
+            'password' => 'Welkom@1234', // password
             'remember_token' => Str::random(10),
         ];
     }
