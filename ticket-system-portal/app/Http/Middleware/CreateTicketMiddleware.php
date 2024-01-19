@@ -8,6 +8,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
+use function Webmozart\Assert\Tests\StaticAnalysis\length;
 
 class CreateTicketMiddleware
 {
@@ -19,32 +20,11 @@ class CreateTicketMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $id = Auth::user()->id;
-        $tickets = Ticket::with('review')->where('user_id', '=', $id)->get();
-        //dd($tickets);
-//        $reviewed_tickets = Review::where('ticket_id', '=', $tickets)->count();
-//        dd($reviewed_tickets);
-        $ticketCount = Ticket::where('user_id', $id)->count();
-        $limit = 3;
-        foreach ($tickets as $ticket) {
-            $reviewed_tickets = $ticket->review->count();
-            dd($reviewed_tickets);
-//                if ($ticketCount >= $limit && $reviewed_ticket == 1) {
-//                    return $next($request);
-//                } elseif ($ticketCount >= $limit && $reviewed_ticket == 0) {
-//                    return redirect('/student/dashboard')->with('message', 'You reached the limit');
-//                } else {
-//                   dd('error');
-//                }
-            }
-//        if($reviewed_ticket > 0) {
-//            dd("Hello world");
-//        }
-//        else {
-//            dd("error");
-//        }
-//        if ($reviewed_tickets >= 3) {
-//            return $next($request);
-//        }
+        $tickets = Ticket::where('user_id', '=', $id)->doesntHave('review')->count();
+        if ($tickets >= 3) {
+            return redirect('/student/dashboard')->with('limit', 'You reach the limit, please wait till the ticket is reviewed');
+        }
+
         return $next($request);
     }
 }

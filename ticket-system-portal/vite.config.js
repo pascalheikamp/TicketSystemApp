@@ -8,7 +8,8 @@ export default defineConfig({
                 'resources/sass/app.scss',
                 'resources/js/app.js',
                 'resources/filter.js',
-                'resources/js/toggle.js'
+                'resources/js/toggle.js',
+                'resources/js/modal-window.js'
             ],
             refresh: true,
         }),

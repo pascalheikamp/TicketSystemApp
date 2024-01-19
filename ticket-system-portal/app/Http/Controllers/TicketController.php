@@ -30,10 +30,11 @@ class TicketController extends Controller
     }
 
     public function send_review(Request $request) {
-        $request->validate([
-            'reviewed_by' => ['required', 'string'],
-            'solution' => ['required', 'string'],
-        ]);
+//        $request->validate([
+//            'reviewed_by' => ['required', 'string'],
+//            'ticket_id' => ['required'],
+//            'solution' => ['required', 'string'],
+//        ]);
 
         $id=$request->ticket_id;
 //dd($id);

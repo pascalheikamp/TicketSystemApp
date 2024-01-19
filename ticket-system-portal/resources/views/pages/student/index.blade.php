@@ -3,6 +3,15 @@
     <div class="dashboard-section">
         <div class=" mt-14 p-10 pl-80 h-auto justify-center grid lg:grid-cols-20 gap-8 bg-gray-100">
             <div class="col-span-3"></div>
+            @if(session('limit'))
+            <div
+                class=" popUp-message absolute ml-96 mr-auto flex justify-center content-center pr-5 pl-5 mt-60 flex justify-center content-center h-60 bg-gray-200 opacity-95 w-72 bg-white  shadow-xl">
+               <div class= "flex mb-16 mx-auto ml-10 justify-center flex-col">
+                <h2 class=" text-2xl text-center mt-5">Alert</h2>
+                <p class="mt-4 font-bold">{{session('limit')}}</p>
+               </div>
+            </div>
+            @endif
             <div class="content-center text-center border-solid border-2 w-72 shadow-xl h-auto bg-white"><h1
                     class=" text-2xl font-medium leading-tight pt-5 mb-5">Profile</h1>
                 <p class="pb-2">Welkom {{ Auth::user()->firstname }}</p>
@@ -40,7 +49,7 @@
                 </div>
             </div>
             @foreach($tickets as $ticket)
-            @include('partials.Ticket.ticket-card')
+                @include('partials.Ticket.ticket-card')
             @endforeach
         </div>
 @endsection
