@@ -2,9 +2,6 @@ let httpRequest;
 
 const closeButton = document.getElementById("closeButton");
 const popupMessage = document.querySelector('.popUp-message');
-closeButton.addEventListener('click', () => {
-   console.log("Hello")
-})
 
 let toggleButtons = document.querySelectorAll('.toggle');
 
